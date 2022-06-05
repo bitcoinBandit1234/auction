@@ -1,0 +1,85 @@
+.sidebar {
+    background-color: #fff;
+    width: 70%;
+}
+
+li{
+    text-decoration: none;
+}
+
+.mainSearchText:focus{
+    outline: none;
+}
+
+.sidebarTitle {
+        display: grid;
+        place-items: center;
+        height: 50px;
+        font-size: 1.3rem;
+        font-weight: 700;
+        font-family: 'Mochiy Pop P one', sans-serif;
+}
+
+.sidebarMenu {
+    display: flex;
+    flex-direction: column;
+    place-content: flex-start;
+    padding: 1rem 3rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #555555;
+    transition: color 0.3s ease-in-out;
+}
+
+.sidebarMenuItem{
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.sidebarMenuItem:hover{
+    cursor: pointer;
+}
+
+
+.sidebar_indicator {
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    background-color: #308efe;
+    transform: translateX(-50%);
+    transition: 0.3s ease-in-out;
+}
+
+.searchMinMax{
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+}
+
+.searchMin{
+    margin-right: 14px;
+}
+
+.minMaxInput{
+    width: 70px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.minMaxSearch{
+    margin-left: 15px;
+    width: 100%;
+    font-size: 20px;
+    height: 40px;
+    border-radius: 5px;
+    align-self: column;
+    background-color: white;
+    border: 2px solid #e7e7e7;
+}
+
+.minMaxSearch:hover{
+    background-color: #e7e7e7;
+    cursor: pointer;
+}

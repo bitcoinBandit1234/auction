@@ -1,0 +1,90 @@
+.chatbox{
+    height: 500px;
+    width: 430px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: azure;
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+
+.chatbox__title{
+    background-color: slateblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.chatbox__title h3{
+    margin-left: 150px;
+}
+
+.chatbox__invisible{
+    display: none;
+}
+
+.chatbox__messages::-webkit-scrollbar {
+    display: none; 
+}
+
+.chatbox__messages{
+    padding: 14px;
+    width: 100%;
+    height: 460px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.chatbox__input{
+    width: 100%;
+    display: flex;
+    flex-direction: row;		
+}
+
+.chatbox__input__message:focus{
+    outline: none;
+}
+
+.chatbox__input__message{
+    font-size: 16px;
+    width: 75%;
+    height: 35px;
+}
+
+.chatbox__input__button{
+    width: 25%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.chatbox__messages__sender{
+    font-size: 15px;
+    color: white;
+    background-color: #2596be;
+    padding: 6px;
+    border-radius: 6px;
+    max-width: 20ch;
+    align-self: flex-end;
+    margin-bottom: 10px;
+
+}
+
+ .chatbox__messages__receiver {
+    font-size: 15px;
+    background-color: #2596be;
+    color: white;
+    max-width: 20ch;
+    width: fit-content;
+    padding: 6px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
