@@ -1,16 +1,16 @@
-import Card from "./card"
-import { sidebarNavItems } from "./sidebar.jsx"
-import "./cardDesign.css"
-import NavBar from "../../component/navbar/nav_bar"
-import { useEffect, useState, useRef } from "react"
-import axios from "axios"
-import ProductGridView from "./productGridView"
-import { FooterContainer } from "../../component/footer"
-
+import { sidebarNavItems } from "./sidebar.jsx";
+import "./cardDesign.css";
+import NavBar from "../../component/navbar/nav_bar";
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import ProductGridView from "./productGridView";
+import { FooterContainer } from "../../component/footer";
 
 function CardDisplay(){
 
   const [auctionItems, setAuctionItems] = useState([]);
+
+  const [searchParam, setSearchParam] = useState('');
 
   let isRendered = useRef(false);
 
@@ -42,8 +42,17 @@ const getCategoryItems = (category)=>{
 }
 
    return( 
+
       <>
+
       <NavBar/>
+
+      <div>
+        <div>
+          <input type="text" onChange={e=>setSearchParam(e.target.value)}/>
+          <button>Search</button>
+        </div>
+      </div>
 
       {<div className="productDisplay">
           <div className="sidebarWrapper">

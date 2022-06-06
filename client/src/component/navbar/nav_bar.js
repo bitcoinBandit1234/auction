@@ -39,6 +39,10 @@ function NavBar(){
           <></>
         }
 
+        {user.username?<li className="logout"><Link to="/profile">Profile</Link></li>: 
+          <></>
+        }
+
         {user.username? <li className="logout" onClick={logoutUser}>logout</li>: 
           <></>
         }

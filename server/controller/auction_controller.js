@@ -132,4 +132,53 @@ const getCategoryProducts = async (req, resp)=>{
   }
 
 }
-module.exports = {addAuction, getAuctionItems, extractAuctionDetail, getCategoryProducts};
+
+function onlyNumbers(array) {
+
+  return array.every(element => {
+
+    return typeof element === 'number';
+
+  });
+  
+}
+
+const getParticipatedProducts = async (req, resp)=>{
+
+  try{
+
+    const products = req.params.poroducts;
+
+    if(onlyNumbers(products) && products.length > 0){
+
+      const sql = `SELECT * FROM auction WHERE auction_id IN (${products})`
+
+      const output = await db.query(sql);
+
+      
+      if(output.length > 0){
+
+        resp.status(200).json({message: "products found succesfully", data: output});
+
+      }
+      else{
+
+        resp.status(400).json({error: "no products of this category found", data: null});
+
+      }
+
+    }
+
+    }catch(error){
+
+    console.log("error from auction_controller" + error);
+
+    resp.status(400).json({
+
+      error: "server failure on data fetching", data: null});
+
+  }
+
+}
+
+module.exports = {addAuction, getAuctionItems, extractAuctionDetail, getCategoryProducts, getParticipatedProducts};

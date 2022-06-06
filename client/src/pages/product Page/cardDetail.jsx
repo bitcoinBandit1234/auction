@@ -27,6 +27,7 @@ function ProductDetail(){
     const chatBtnRef = useRef();
     const {id} = useParams();
     const navigate = useNavigate();
+    const [localProducts, setLocalProducts] = useState([]);
 
     const joinChat = ()=>{
       setRender(true);
@@ -53,7 +54,19 @@ function ProductDetail(){
   }, []);
 
   const enterBid = ()=>{
+
+    setLocalProducts(JSON.parse(localStorage.getItem('participatedProducts')));
+
+    if(!localProducts.includes(itemDetail[0].auction_id)){
+
+      setLocalProducts(...localProducts, itemDetail[0].auction_id);
+
+      localStorage.setItem('participatedProducts', JSON.stringify(localProducts));
+
+    }
+
     socket.emit('updateBid', itemDetail[0].auction_id);
+
   }
 
   const completeFunction = ()=>{
@@ -69,10 +82,6 @@ function ProductDetail(){
       return <span>{(days*24)+hours}hr:{minutes}min:{seconds}sec</span>;
     }
   };
-
-  const makePayment = ()=>{
-
-  }
 
   useEffect(()=>{
     if(itemDetail.length !== 0 ){
@@ -123,7 +132,7 @@ function ProductDetail(){
                 <span className='card__detail'>Next bid amount: {nextBidAmt}</span>
                 <span className='card__detail'>Time Left: <Countdown date={Date.now()+(toSecond(itemDetail[0].auction_end_date+ " ", itemDetail[0].auction_end_time+":12"))} renderer={renderer} onComplete={completeFunction}/></span>
                 {itemDetail[0].expired == "true" || currentBidder==user.username?
-                  <button ref={chatBtnRef} onClick={()=>{checkout.show({amount: 1200})}} className="cart">pay via khalti</button>
+                <></>
                 :
                 <>
                 <button ref={bidBtnRef} className="cart" onClick={enterBid}>Bid</button>
