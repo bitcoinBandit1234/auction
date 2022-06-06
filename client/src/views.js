@@ -26,14 +26,14 @@ const Views = () => {
 
         <Route path="/productDetail/:id" element={<ProductDetail/>} />
 
-        <Route path="/profile" element={<SidebarRoutes/>} />
+        <Route path="/profile/*" element={<SidebarRoutes/>} />
 
         <Route element={<PrivateRoutes />}>
 
           <Route path="/addAuction" element={<AuctionAdd/>} />
 
         </Route>
-
+        
       </Routes>
   );
 };

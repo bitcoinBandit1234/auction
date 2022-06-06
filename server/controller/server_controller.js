@@ -17,7 +17,7 @@ const expressSession = session({
         secure: "auto", // If true: only transmit cookie over https
         httpOnly: true, 
         sameSite: "lax",
-        maxAge: 1000 * 60 * 60 * 24 // Measured in milliseconds
+        maxAge: 1000 * 60 * 60 * 24*  2 // Measured in milliseconds
     }
 })
 

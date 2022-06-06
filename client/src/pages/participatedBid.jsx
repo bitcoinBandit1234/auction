@@ -18,8 +18,6 @@ function ParticipatedBid(){
 
         useEffect(() => {
 
-            setPorducts(JSON.parse(localStorage.getItem('participatedProducts')));
-
             if(itemDetails.length == 0){
 
                 setError("Not participated in Bids yet");

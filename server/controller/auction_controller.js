@@ -192,15 +192,11 @@ const getNameProducts = async (req, resp)=>{
 
         resp.status(200).json({message: "products found succesfully", data: output});
 
-        console.log("sandesh sis a bitch");
-
       }
 
       else{
 
         resp.status(400).json({error: "no products of this category found", data: null});
-
-        console.log("sewak a bitch");
 
       }
 
@@ -215,4 +211,35 @@ const getNameProducts = async (req, resp)=>{
 
 }
 
-module.exports = {addAuction, getAuctionItems, extractAuctionDetail, getCategoryProducts, getParticipatedProducts, getNameProducts};
+const getWonProducts = async (req, resp)=>{
+  
+  try{
+
+
+      const output = await db.query(`SELECT * FROM auction_winners WHERE username = ?`, req.params.username);
+
+      if(output.length > 0){
+
+        const productDetail = await db.query(`SELECT auction.title, auction.image, auction_winners.auction_id, auction_winners.bid_amount fROM auction_winners INNER JOIN auction on auction.auction_id = auction_winners.auction_id AND username=?`, req.params.username);
+
+        resp.status(200).json({message: "products found succesfully", data: productDetail});
+      }
+
+      else{
+
+        resp.status(400).json({error: "no products of this category found", data: null});
+
+      }
+
+  }catch(error){
+
+    console.log("error from auction_controller getWonProducts" + error);
+
+    resp.status(400).json({
+      error: "server failure on data fetching", data: null});
+
+  }
+
+}
+
+module.exports = {addAuction, getAuctionItems, extractAuctionDetail, getCategoryProducts, getParticipatedProducts, getNameProducts, getWonProducts};

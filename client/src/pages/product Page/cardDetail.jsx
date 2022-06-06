@@ -59,8 +59,7 @@ function ProductDetail(){
   }
 
   const completeFunction = ()=>{
-    bidBtnRef.current.classList.add("unclickable");
-    chatBtnRef.current.classList.add("unclickable");
+    console.log("completed");
     socket.emit("setWinner", itemDetail[0].auction_id);
   }
 
