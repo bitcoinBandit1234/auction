@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import ProductGridView from "./productGridView";
 import { FooterContainer } from "../../component/footer";
+import {FaSearch} from "react-icons/fa";
 
 function CardDisplay(){
 
@@ -13,6 +14,8 @@ function CardDisplay(){
   const [searchParam, setSearchParam] = useState('');
 
   let isRendered = useRef(false);
+
+  const [productError, setProductError] = useState("");
 
 useEffect(() => {
     isRendered.current = true;
@@ -41,6 +44,21 @@ const getCategoryItems = (category)=>{
   }).catch(err=>console.log(err.message));
 }
 
+const getSearchedItems = () =>{
+
+  axios
+  .get("http://localhost:3301/product/productName/" + searchParam)
+  .then(res => {
+      if (res.status <= 200) {
+          if(res.data.data.length !== 0){
+            setProductError("");
+            setAuctionItems(res.data.data);
+          }
+      }
+  }).catch((err)=>{setProductError("No product found"); console.log(err)});
+
+}
+
    return( 
 
       <>
@@ -49,18 +67,18 @@ const getCategoryItems = (category)=>{
 
       <div>
         <div>
-          <input type="text" onChange={e=>setSearchParam(e.target.value)}/>
-          <button>Search</button>
+          <input className="productSearch" type="text" onChange={e=>setSearchParam(e.target.value)}/>
+          <button className="prodSearchBtn" onClick={()=>{getSearchedItems()}}>Search<FaSearch/></button>
         </div>
       </div>
 
       {<div className="productDisplay">
           <div className="sidebarWrapper">
-            <div className='sidebar'>
-              <div className="sidebarTitle">
+            <div style={{backgroundColor:"white"}} className='sidebar'>
+              <div style={{backgroundColor:"white", color:"black"}} className="sidebarTitle">
               choose category
             </div>
-        <div className="sidebarMenu">
+        <div className="sidebarMenu" style={{backgroundColor:"white"}}>
             {
                 sidebarNavItems.map((item, index) => (
                         <div className="sidebarMenuItem" key={index}>
@@ -73,9 +91,14 @@ const getCategoryItems = (category)=>{
         </div>
     </div>
         </div>
-        
-        <ProductGridView auctionItems={auctionItems}/>
 
+        {
+          productError !== "" ?
+          <h1 style={{textAlign:"center"}}>No such product found</h1>
+          :
+          <ProductGridView auctionItems={auctionItems}/>
+        }
+      
         {/* <div className="wrapper">
           {auctionItems.length !== 0 ?
             auctionItems.map((item)=>{

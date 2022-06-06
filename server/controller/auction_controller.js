@@ -147,7 +147,7 @@ const getParticipatedProducts = async (req, resp)=>{
 
   try{
 
-    const products = req.params.poroducts;
+    const products = req.params.products;
 
     if(onlyNumbers(products) && products.length > 0){
 
@@ -181,4 +181,38 @@ const getParticipatedProducts = async (req, resp)=>{
 
 }
 
-module.exports = {addAuction, getAuctionItems, extractAuctionDetail, getCategoryProducts, getParticipatedProducts};
+
+const getNameProducts = async (req, resp)=>{
+  
+  try{
+
+      const output = await db.query(`SELECT * FROM auction WHERE title like '%${req.params.searchParam}%'`);
+
+      if(output.length > 0){
+
+        resp.status(200).json({message: "products found succesfully", data: output});
+
+        console.log("sandesh sis a bitch");
+
+      }
+
+      else{
+
+        resp.status(400).json({error: "no products of this category found", data: null});
+
+        console.log("sewak a bitch");
+
+      }
+
+  }catch(error){
+
+    console.log("error from auction_controller" + error);
+
+    resp.status(400).json({
+      error: "server failure on data fetching", data: null});
+
+  }
+
+}
+
+module.exports = {addAuction, getAuctionItems, extractAuctionDetail, getCategoryProducts, getParticipatedProducts, getNameProducts};

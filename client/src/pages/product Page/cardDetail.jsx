@@ -27,7 +27,6 @@ function ProductDetail(){
     const chatBtnRef = useRef();
     const {id} = useParams();
     const navigate = useNavigate();
-    const [localProducts, setLocalProducts] = useState([]);
 
     const joinChat = ()=>{
       setRender(true);
@@ -54,16 +53,6 @@ function ProductDetail(){
   }, []);
 
   const enterBid = ()=>{
-
-    setLocalProducts(JSON.parse(localStorage.getItem('participatedProducts')));
-
-    if(!localProducts.includes(itemDetail[0].auction_id)){
-
-      setLocalProducts(...localProducts, itemDetail[0].auction_id);
-
-      localStorage.setItem('participatedProducts', JSON.stringify(localProducts));
-
-    }
 
     socket.emit('updateBid', itemDetail[0].auction_id);
 
