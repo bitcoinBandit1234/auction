@@ -9,13 +9,13 @@ const setWinner = async (socket, auction_id) => {
 
             db.query("UPDATE auction SET expired = 'true' WHERE auction_id = ?", [auction_id]);
 
-            console.log("expired")
-
             const date = new Date();
 
             const postedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 
-            console.log()
+            console.log("in autoextention");
+
+            db.query("UPDATE auction SET auction_end_date = '2022-6-8' WHERE auction_id = ?", [auction_id]);
 
             if(auctionStatus.currentHighestBid >= auctionStatus.minimumBid){
                 db.query("INSERT INTO auction_winners (auction_id, bid_amount, date, username) VALUES(?,?,?,?)", 

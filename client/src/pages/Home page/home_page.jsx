@@ -94,7 +94,7 @@ export const socket = io.connect("http://localhost:3301", {withCredentials: true
                 </div>
             </section>
 
-            <section className="popular-category-section">
+            <section className="popular-category-section" style={{marginTop: "24px"}}>
 
                 <h3>Popular Products</h3>
 
@@ -114,9 +114,9 @@ export const socket = io.connect("http://localhost:3301", {withCredentials: true
 
             </section> 
 
-            <section className="popular-category-section">
+            <section className="popular-category-section" style={{marginTop: "24px"}}>
 
-                <h3>Hidden Gems</h3>
+                <h3>Explore Hidden</h3>
 
                 <div className="wrapper">
                     {underdogs.length !== 0 ?
@@ -134,7 +134,6 @@ export const socket = io.connect("http://localhost:3301", {withCredentials: true
 
             </section>
     </div>
-    <FooterContainer/>
 </>
 
     );

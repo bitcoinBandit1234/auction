@@ -8,7 +8,6 @@ import KhaltiCheckout from "khalti-checkout-web";
 
 function ProfilePayment(){
 
-    let checkout = new KhaltiCheckout(config);
     const {user} = useContext(AccountContext);
 
     const username = user.username;
@@ -59,12 +58,15 @@ function ProfilePayment(){
                     myPayment.map((item)=>{
                         return(
 
-                        <div onClick={()=>checkout.show({amount: item.bid_amount})} key={item.auction_id} >
+                        <div onClick={()=>{
+                            config.productIdentity = item.auction_id;
+                            config.productName = item.title;
+                            let checkout = new KhaltiCheckout(config);
+                            checkout.show({amount: 3000})}} key={item.auction_id} >
 
                             <Card  key={item.auction_id} img={item.image} title={item.title} startDate={item.auction_start_date} startTime={item.auction_start_time} amount={item.bid_amount} endDate={item.auction_end_date} endTime={item.auction_end_time}/>
                         
                         </div>
-                        
                         
                         );
                     })

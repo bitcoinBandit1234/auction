@@ -12,7 +12,6 @@ let config = {
 
             axios.post('http://localhost:3301/auth/payment',
             {...payload},{ withCredentials: true });
-            console.log(payload);
         },
         // onError handler is optional
         onError (error) {

@@ -14,8 +14,6 @@ const getBidProducts = async (socket) => {
 
             const auctionStatus = await RedisClient.hgetall(keys[i]);
 
-            if(popular.length < 6 && underdogs.length < 6){
-
                 if(auctionStatus.totalBids >= 20){
 
                     popular.push(parseInt(keys[i].split(':')[1]));
@@ -25,11 +23,6 @@ const getBidProducts = async (socket) => {
                     underdogs.push(parseInt(keys[i].split(':')[1]));
 
                 }
-            }else{
-
-                return;
-
-            }
         }
 
         const underdogsDetail = await db.query(`SELECT * FROM auction WHERE auction_id IN (${underdogs})`);

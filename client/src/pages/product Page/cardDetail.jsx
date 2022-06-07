@@ -13,6 +13,7 @@ import KhaltiCheckout from "khalti-checkout-web";
 import config from '../../component/khalti/khaltiConfig';
 import NavBar from '../../component/navbar/nav_bar';
 import { FooterContainer } from '../../component/footer';
+import productLoading from "../../assets/productLoading.gif"
 
 function ProductDetail(){
     let checkout = new KhaltiCheckout(config);
@@ -130,7 +131,11 @@ function ProductDetail(){
               </div>
             </div>
           </div>:
-          <>Item detail not found</>
+                  <img
+                  src={productLoading}
+                  style={{ width: '100%', margin: 'auto', display: 'block' }}
+                  alt='Loading...'
+                />
           }
           {render? <ChatBox socket={socket} user={user} seller={itemDetail[0].customer_id}/>: <></>}
       </div>
